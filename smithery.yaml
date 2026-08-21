@@ -1,0 +1,33 @@
+# Smithery configuration for Recall
+# Schema: https://smithery.ai/docs/build/project-config
+# Remote HTTP MCP — server hosted at https://api.mcp.ai/p_recall
+
+name: recall-mcp
+displayName: "Recall"
+description: >
+  Recall (recall.it) — sua base de conhecimento de IA / 'segundo cérebro'. Via API oficial: busca semântica nos seus cards, listagem com filtros (tags, datas, URL de origem) e leitura do conteúdo de um card. Somente leitura (a escrita ainda não é exposta pela Recall). Gere sua API key em Settings → API & MCP (plano Max).
+
+version: 0.1.0
+license: MIT
+homepage: https://github.com/mcp-dir/recall-mcp
+repository: https://github.com/mcp-dir/recall-mcp
+
+tags:
+  - recall
+  - brazil
+  - horizontal
+  - read-only
+
+# Remote HTTP MCP — sem startCommand local (servidor já hospedado)
+startCommand:
+  type: http
+  url: https://api.mcp.ai/p_recall
+
+auth:
+  type: oauth2
+  resourceMetadataUrl: https://api.mcp.ai/p_recall/.well-known/oauth-protected-resource
+  fallback:
+    type: agent-auth
+    description: >
+      Para clientes sem OAuth 2.1. O agente expõe uma tool authenticate(token).
+      Usuário gera o JWT em https://app.mcp.ai/agent-auth e cola no chat.
